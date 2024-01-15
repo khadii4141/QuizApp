@@ -15,10 +15,10 @@ let questions = [
     question: "In which HTML element, we put the JavaScript code?",
     answer: "<script>...</script>",
     options: [
-      "<javascript>...</javascript>",
-      "<js>...</js>",
-      "<script>...</script>",
-      "<css>...</css>"
+      "&lt;javascript&gt;...&lt;/javascript&gt;",
+      "&lt;js&gt;...&lt;/js&gt;",
+      "&lt;script&gt;...&lt;/script&gt;",
+      "&lt;css&gt;...&lt;/css&gt;"
     ]
   },
     {
@@ -140,17 +140,19 @@ start_btn.onclick = ()=>{
 exit_btn.onclick = ()=>{
     info_box.classList.remove("activeInfo"); //hide info box
 }
+let que_count = 0;
 // if continueQuiz button clicked
 continue_btn.onclick = ()=>{
+    que_count = 0;
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
-    showQuetions(0); //calling showQestions function
+    showQuetions(que_count); //calling showQestions function
     queCounter(1); //passing 1 parameter to queCounter
     startTimer(15); //calling startTimer function
     startTimerLine(0); //calling startTimerLine function
 }
 let timeValue =  15;
-let que_count = 0;
+
 let que_numb = 1;
 let userScore = 0;
 let counter;
@@ -200,6 +202,7 @@ next_btn.onclick = ()=>{
         clearInterval(counterLine); //clear counterLine
         showResult(); //calling showResult function
     }
+    feedback.textContent=''
 }
 // getting questions and options from array
 function showQuetions(index){
@@ -242,7 +245,7 @@ function optionSelected(answer){
     }else{
         answer.classList.add("incorrect"); //adding red color to correct selected option
         answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
-        feedback.textContent = `That's incorrect! The correct answer is: ${accessQui z.options[accessQuiz.answer]}.`;
+        feedback.textContent = `That's incorrect! The correct answer is: ${correcAns}.`;
         console.log("Wrong Answer");
         for(i=0; i < allOptions; i++){
             if(option_list.children[i].textContent == correcAns){ //if there is an option which is matched to an array answer 
@@ -318,4 +321,4 @@ function queCounter(index){
     //creating a new span tag and passing the question number and total question
     let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
-}
+} 
